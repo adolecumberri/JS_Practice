@@ -41,14 +41,17 @@ La propiedad del objeto debe cambiar aun siendo alterada fuera de la funcion
 
 ejemplo:
 ```
-let objeto ....
-
-funcion (nombre de la propiedad, objeto)
-....
-
-console.log objeto.nombre de la propiedad
-funcion ....
-console.log objeto.nombre de la propiedad
+//probando esta mal
+let objeto = {var1:0,var2:10}
+function referencia(propiedad, objeto)
+{objeto.propiedad=objeto.propiedad+15;
+		return objeto}
+let propiedad="var1"
+referencia(propiedad,objeto)
+console.log(objeto.var1)
+propiedad="var2"
+referencia(propiedad,objeto)
+console.log(objeto.var2)
 ```
 
 ## 3. Array Transformation
@@ -61,13 +64,42 @@ La manera de crearlo debe ser
 ejemplo:
 ```
 arr = [1,2,3,4];
-fn = (n) => n + 1;
-
-const newArray = filter(arr, fn); // [2,3,4,5]
-tienes que hacer la funcion filter
+//fn = (n) => n + 1;
+function fn(array)
+{let i=0;
+ let returnedArray=array;
+    while(i<array.length){
+        returnedArray[i] = array[i]+1
+        i++
+    }
+    return returnedArray
+}
+fn(arr)
+//const newArray = filter(arr, fn); // [2,3,4,5]
+//tienes que hacer la funcion filter
 ```
-
-
+solucion mas completa pero algo falla
+```
+arr = [1,2,3,4];
+//fn = (n) => n + 1;
+function fn(arr[i], i)
+{
+    arr[i]=arr[i]+1
+    return arr[i]
+}
+function filter(arr,fn)
+{
+    let i=0
+    let returnedArray=arr
+    while(i<arr.length){
+        returnedArray[i] = fn(arr[i], i)
+        i++
+    }
+    
+    return returnedArray
+}
+const newArray = filter(arr, fn); // [2,3,4,5]
+```
 ## 4. Array Filter
 same than 3 but with a filter.
 Given an array "arr" of integers and a filter function, create a function to filter them if the result is thruly
