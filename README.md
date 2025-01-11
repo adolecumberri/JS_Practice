@@ -100,6 +100,28 @@ function filter(arr,fn)
 }
 const newArray = filter(arr, fn); // [2,3,4,5]
 ```
+la anterior pero fn no usa arr[i] como parametro y sí funciona
+```
+arr = [1,2,3,4];
+//fn = (n) => n + 1;
+function fn(arr, i)
+{
+    arr[i]=arr[i]+1
+    return arr[i]
+}
+function filter(arr,fn)
+{
+    let i=0
+    let returnedArray=arr
+    while(i<arr.length){
+        returnedArray[i] = fn(arr, i)
+        i++
+    }
+    
+    return returnedArray
+}
+const newArray = filter(arr, fn); // [2,3,4,5]
+```
 ## 4. Array Filter
 same than 3 but with a filter.
 Given an array "arr" of integers and a filter function, create a function to filter them if the result is thruly
