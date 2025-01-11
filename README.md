@@ -17,10 +17,17 @@ Write a function that given the number "n", it will return n and then returns 1 
 
 ejemplo:
 ```
-const n = ....
+const n=0;
+let contador=n-1;
+function counter()
+{++contador;
+return contador}
 counter() // da n
-counter() // da n+1
-counter() // da n+2
+console.log(contador)
+counter()// da n+1
+console.log(contador)
+counter()// da n+2
+console.log(contador)
 ...
 ...
 ``` 
