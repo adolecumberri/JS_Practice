@@ -26,9 +26,33 @@ let donetes=
 //5.2 los carriles de la maquina
 class carril 
 {
-    Precio=0;
-    Producto="Ninguno";
-    Slots=new Array(8)
+    Precio;
+    Producto;
+    Slots;
+
+    extraer(){
+        for(let i=0;i<obj.railsize;i++)
+        {
+            Slots[i]=Slots[i+1];
+        }
+        return Slots[0]
+    }
+
+    rellenar(lista){
+        if (lista.length<=obj.railsize){
+            for(let i=0;i<lista.length;i++)
+                {
+                    Slots[i]=lista[i];
+                }
+        }
+        return Slots
+    }
+
+    constructor(obj){
+        Precio=obj.Precio ?? 0;
+        Producto=obj.Producto ?? "Ninguno";
+        Slots=new Array(obj.railsize ?? 8)
+    }
 }
 //5.3 la maquina
 let maquina=
