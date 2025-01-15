@@ -48,4 +48,25 @@ class carril {
   }
 }
 //5.3 la maquina
-let maquina = {};
+class maquina {
+  tipocarril;
+  filas;
+  columnas;
+
+  constructor(obj) {
+    tipocarril = obj.tipocarril ?? carril;
+    filas = obj.filas ?? 10;
+    columnas = obj.columnas ?? 10;
+  }
+  updateFilaName(posicion, name) {
+    fila = posicion[0] - 1;
+    columna = posicion[1] - 1;
+    return (carril.Producto = name);
+  }
+
+  updateFilaPrice(posicion, precio) {
+    fila = posicion[0] - 1;
+    columna = posicion[1] - 1;
+    return (carril.Precio = precio);
+  }
+}
