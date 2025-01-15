@@ -52,21 +52,30 @@ class maquina {
   tipocarril;
   filas;
   columnas;
-
+  matriz
   constructor(obj) {
     tipocarril = obj.tipocarril ?? carril;
     filas = obj.filas ?? 10;
     columnas = obj.columnas ?? 10;
+    matriz=obj.matriz ?? [];
+
+    this.matriz = new Array(filas);
+    for (let i = 0; i < this.columnas; i++) {
+      this.matriz[i] = new Array(columnas);
+      for (let j = 0; j < this.columnas; j++) {
+        this.matriz[(i, j)] = new carril();
+      }
+    }
   }
   updateFilaName(posicion, name) {
     fila = posicion[0] - 1;
     columna = posicion[1] - 1;
-    return (carril.Producto = name);
+    return this.matriz[fila,columna].Producto = name;
   }
 
   updateFilaPrice(posicion, precio) {
     fila = posicion[0] - 1;
     columna = posicion[1] - 1;
-    return (carril.Precio = precio);
+    return this.matriz[fila,columna].Precio = precio;
   }
 }
