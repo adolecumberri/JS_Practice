@@ -24,29 +24,27 @@ class carril {
   Precio;
   Producto;
   railsize;
-  Slots = new Array(obj.railsize);
-  extraer() {
-    if (this.Slots.length > 0) {
-      return Slots.pop();
-    } else {
-      throw new SyntaxError("carril vacio, nada que sacar");
-    }
-  }
-
-  rellenar(lista) {
-    recarga = this.Slots.concat(lista);
-    if (recarga.length > railsize) {
-      throw new SyntaxError("carril sobrecargado");
-    } else {
-      Slots = recarga;
-      return Slots;
-    }
-  }
+  Slots;
 
   constructor(obj) {
     Precio = obj.Precio ?? 0;
     Producto = obj.Producto ?? "Ninguno";
     railsize = obj.railsize ?? 8;
+    Slots = obj.Slots ?? [];
+  }
+  extraer() {
+    if (this.Slots.length < 1) {
+      throw new SyntaxError("carril vacio, nada que sacar");
+    }
+    return Slots.pop();
+  }
+
+  rellenar(lista) {
+    if (this.Slots.length + lista.length > this.railsize) {
+      throw new SyntaxError("carril sobrecargado");
+    }
+    Slots = this.Slots.concat(lista);
+    return Slots;
   }
 }
 //5.3 la maquina
