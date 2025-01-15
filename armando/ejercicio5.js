@@ -23,25 +23,30 @@ let donetes = {
 class carril {
   Precio;
   Producto;
-  Slots;
-
+  railsize;
+  Slots = new Array(obj.railsize);
   extraer() {
-    return Slots.pop()
+    if (this.Slots.length > 0) {
+      return Slots.pop();
+    } else {
+      throw new SyntaxError("carril vacio, nada que sacar");
+    }
   }
 
   rellenar(lista) {
-    if (lista.length <= obj.railsize) {
-      for (let i = 0; i < lista.length; i++) {
-        Slots[i] = lista[i];
-      }
+    recarga = this.Slots.concat(lista);
+    if (recarga.length > railsize) {
+      throw new SyntaxError("carril sobrecargado");
+    } else {
+      Slots = recarga;
+      return Slots;
     }
-    return Slots;
   }
 
   constructor(obj) {
     Precio = obj.Precio ?? 0;
     Producto = obj.Producto ?? "Ninguno";
-    Slots = new Array(obj.railsize ?? 8);
+    railsize = obj.railsize ?? 8;
   }
 }
 //5.3 la maquina
