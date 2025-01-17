@@ -52,30 +52,48 @@ class maquina {
   tipocarril;
   filas;
   columnas;
-  matriz
+  matriz;
   constructor(obj) {
     tipocarril = obj.tipocarril ?? carril;
     filas = obj.filas ?? 10;
     columnas = obj.columnas ?? 10;
-    matriz=obj.matriz ?? [];
+    matriz = obj.matriz ?? [];
 
     this.matriz = new Array(filas);
-    for (let i = 0; i < this.columnas; i++) {
+    for (let i = 0; i < this.filas; i++) {
       this.matriz[i] = new Array(columnas);
       for (let j = 0; j < this.columnas; j++) {
-        this.matriz[(i, j)] = new carril();
+        this.matriz[i][j] = new carril();
       }
     }
   }
   updateFilaName(posicion, name) {
-    fila = posicion[0] - 1;
-    columna = posicion[1] - 1;
-    return this.matriz[fila,columna].Producto = name;
+    fila = Number(posicion[0]) - 1;
+    columna = Number(posicion[1]) - 1;
+    return (this.matriz[fila][columna].Producto = name);
   }
 
   updateFilaPrice(posicion, precio) {
-    fila = posicion[0] - 1;
-    columna = posicion[1] - 1;
-    return this.matriz[fila,columna].Precio = precio;
+    fila = Number(posicion[0]) - 1;
+    columna = Number(posicion[1]) - 1;
+    return (this.matriz[fila][columna].Precio = precio);
   }
+
+  consultar(posicion) {
+    if (
+      this.matriz[fila][columna].Producto === "Ninguno" ||
+      this.matriz[fila][columna].Precio === 0
+    )
+      fila = Number(posicion[0]) - 1;
+    columna = Number(posicion[1]) - 1;
+    return (
+      this.matriz[fila][columna].Producto +
+      "a" +
+      (this.matriz[fila][columna].Precio + "")
+    );
+  }
+  addmoney(){
+
+  }
+  comprar(){}
 }
