@@ -48,16 +48,41 @@ class carril {
   }
 }
 //5.3 la maquina
+class monedero {
+  dinero;
+  constructor(obj) {
+    dinero = obj.dinero ?? 0;
+  }
+  addmoney(money) {
+    this.dinero = this.dinero + money;
+    return this.dinero;
+  }
+  compruebamoney(money) {
+    //aqui money es el precio del producto
+    if (money > this.dinero) {
+      console.log("falta dinero");
+      return false;
+    } else {
+      console.log("dinero suficiente");
+      this.dinero = this.dinero - money;
+      return true;
+    }
+  }
+}
+
 class maquina {
   tipocarril;
   filas;
   columnas;
   matriz;
+  monederomaquina;
+
   constructor(obj) {
-    tipocarril = obj.tipocarril ?? carril;
+    tipocarril = obj.tipocarril ?? new carril();
     filas = obj.filas ?? 10;
     columnas = obj.columnas ?? 10;
     matriz = obj.matriz ?? [];
+    monederomaquina = obj.monederomaquina ?? new monedero();
 
     this.matriz = new Array(filas);
     for (let i = 0; i < this.filas; i++) {
@@ -92,8 +117,22 @@ class maquina {
       (this.matriz[fila][columna].Precio + "")
     );
   }
-  addmoney(){
 
+  comprar(posicion) {
+    fila = Number(posicion[0]) - 1;
+    columna = Number(posicion[1]) - 1;
+
+    if (
+      this.monederomaquina.compruebamoney(this.matriz[fila][columna].Precio)
+    ) {
+      return "entregado item " + this.matriz[fila][columna].extraer()+"cambio de "+this.monederomaquina.dinero;
+    }
+    else {return "compra fallida";}
   }
-  comprar(){}
 }
+
+//probando cosas
+//let mimaquina=new maquina;
+//mimaquina.updateFilaName("26","emanems")
+let purse = new monedero();
+console.log(purse.dinero)
