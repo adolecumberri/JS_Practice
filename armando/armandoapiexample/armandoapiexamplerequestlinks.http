@@ -1,0 +1,14 @@
+###probando el post
+POST http://localhost:1234/ABU
+Content-Type: application/json
+
+{
+    "name": "Dark_Ritual",
+    "color": "black",
+    "cost": "B",
+    "type": "instant",
+    "text": "Add 3 black mana to your mana pool"
+}
+
+###
+GET http://localhost:1234/ABU/Dark_Ritual
