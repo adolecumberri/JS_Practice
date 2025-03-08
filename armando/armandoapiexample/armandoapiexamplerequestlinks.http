@@ -12,3 +12,11 @@ Content-Type: application/json
 
 ###
 GET http://localhost:1234/ABU/Dark_Ritual
+
+###
+PATCH http://localhost:1234/ABU
+Content-Type: application/json
+
+{
+    "text": "Add BBB"
+}

@@ -2,6 +2,7 @@
   "name": "armandoapiexample",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -9,7 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "2.8.5",
     "express": "4.21.2",
+    "path-to-regexp": "^8.2.0",
     "zod": "3.24.2"
   }
 }
