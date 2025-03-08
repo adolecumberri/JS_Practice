@@ -2,7 +2,7 @@
 import express,{json} from 'express'
 const app=express()
 
-import { randomUUID } from 'node:crypto'
+import * as crypto from 'node:crypto'
 
 import {pathToRegexp,match,parse,compile} from 'path-to-regexp'
 const keys = []
@@ -10,6 +10,7 @@ const regexp=pathToRegexp('/foo/:bar',keys)
 
 import cors from 'cors'
 
+import { validateCard } from './post_validation.js'
 
 app.use(cors({
     origin: (origin,callback)=>{
@@ -26,8 +27,6 @@ app.use(cors({
         return callback(new Error('Not allowed by CORS'))
     }
 }))
-
-const PORT = process.env.PORT ?? 1234
 
 const dark_ritual={
     "name": "Dark_Ritual",
@@ -47,7 +46,7 @@ app.get('/ABU/Dark_Ritual',(req,res)=>{
     res.json(dark_ritual)
 })
 
-import { validateCard } from './post_validation.js'
+
 
 app.post('/ABU',(req,res)=>{
     let body=''
@@ -88,6 +87,16 @@ app.patch('/ABU/:id',(req,res)=>{
     return res.json(updateCard)
 })
 
-app.listen(PORT,() => {
-    console.log(`server listening on port http://localhost:${PORT}`)
+//import * as net from 'node:net'
+import { findAvailablePort } from './findPort.mjs'
+const desiredPort=process.env.PORT??1234
+//const server = net.createServer((req, res) => {
+ //   console.log('request received')    
+   // res.end('Hola mundo')
+ // })
+findAvailablePort(desiredPort).then(port=>{
+    app.listen(port,()=>{
+        console.log(`server listening on port http://localhost:${port}`)
+    })
 })
+
