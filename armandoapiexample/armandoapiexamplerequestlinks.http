@@ -4,9 +4,9 @@ Content-Type: application/json
 
 {
     "name": "Dark_Ritual",
-    "color": "Black",
+    "color": ["Black"],
     "cost": "B",
-    "type": "Instant",
+    "type": ["Instant"],
     "text": "Add 3 black mana to your mana pool"
 }
 
@@ -14,9 +14,13 @@ Content-Type: application/json
 GET http://localhost:1234
 
 ###
-PATCH http://localhost:1234/ABU/Dark_Ritual
+PATCH http://localhost:1234/ABU/19e1d1b8-2a53-47ac-a29e-343fa1f5dbd5
 Content-Type: application/json
 
 {
+    "name": "Dark_Ritual",
+    "color": ["Black"],
+    "cost": "B",
+    "type": ["Instant"],
     "text": "Add BBB"
 }

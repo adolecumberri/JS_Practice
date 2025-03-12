@@ -1,6 +1,4 @@
 import { cardSchema } from "./cardSchema.mjs"
-function validateCard(input){
-    return cardSchema.safeParse(input)
+export function validateCard(input){
+    return cardSchema.parse(input)
 }
-
-export {validateCard}

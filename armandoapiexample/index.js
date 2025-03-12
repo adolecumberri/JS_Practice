@@ -1,6 +1,7 @@
 
 import express,{json} from 'express'
 const app=express()
+app.use(express.json());
 
 import * as crypto from 'node:crypto'
 
@@ -35,32 +36,23 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/ABU',(req,res)=>{
-    let body=''
-    //escuchar el evento data
-    req.on('data',chunk=>{
-        body+=chunk.toString()
-    })
-    req.on('end',()=>{
-        const data = JSON.parse(body)
-        console.log(data)
-        //data.timestamp=Date.now()
-        const result=validateCard(data)
-        console.log(result)
-        if(result.error){
-            return res.status(400).json({error: result.error.message})
+        const success=validateCard(req.body)
+        console.log(success)
+        if(!success){
+            return res.status(400)
         }
         const newCard={
             id: crypto.randomUUID(),
-            ...result.data
+            ...req.body
         }
         return res.json(newCard)
-    })
+    
 })
 
 app.patch('/ABU/:id',(req,res)=>{
-    const result=validateCard(req.body)
+    const success=validateCard(req.body)
 
-    if (!result.success){
+    if (!success){
         return res.status(400).json({error:JSON.parse(result.error.message)})
     }
 
