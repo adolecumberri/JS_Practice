@@ -14,13 +14,9 @@ Content-Type: application/json
 GET http://localhost:1234
 
 ###
-PATCH http://localhost:1234/ABU/19e1d1b8-2a53-47ac-a29e-343fa1f5dbd5
+PATCH http://localhost:1234/ABU/ada9970c-78d6-429d-ab89-8a9f371c5fa5
 Content-Type: application/json
 
 {
-    "name": "Dark_Ritual",
-    "color": ["Black"],
-    "cost": "B",
-    "type": ["Instant"],
     "text": "Add BBB"
 }

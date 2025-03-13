@@ -13,6 +13,8 @@ import cors from 'cors'
 
 import { validateCard } from './post_validation.js'
 
+const CARDS_FILE='./cardsdatabase.json'
+
 app.use(cors({
     origin: (origin,callback)=>{
         const ACCEPTED_ORIGINS=[
@@ -32,12 +34,11 @@ app.use(cors({
 app.disable('x-powered-by')
 
 app.get('/',(req,res)=>{
-    res.send('Welcome Planeswalker!')
+   res.send('Welcome Planeswalker!')
 })
 
 app.post('/ABU',(req,res)=>{
         const success=validateCard(req.body)
-        console.log(success)
         if(!success){
             return res.status(400)
         }
@@ -45,32 +46,37 @@ app.post('/ABU',(req,res)=>{
             id: crypto.randomUUID(),
             ...req.body
         }
+        saveData(newCard,CARDS_FILE)
         return res.json(newCard)
     
 })
 
 app.patch('/ABU/:id',(req,res)=>{
     const success=validateCard(req.body)
-
     if (!success){
         return res.status(400).json({error:JSON.parse(result.error.message)})
     }
 
     const {id}=req.params
+    const cards=readData(CARDS_FILE)
     const cardIndex= cards.findIndex(card=>card.id === id)
     if (cardIndex===-1){
         return res.status(404).json({message:'Card not found'})
     }
-    const updateCard={
+    
+    cards[cardIndex]={
         ...cards[cardIndex],
-        ...result.data
+        ...success
     }
-    cards[cardIndex]=updateCard
+    const updateCard=cards[cardIndex]
+    console.log(updateCard)
+    saveData(updateCard,CARDS_FILE)
     return res.json(updateCard)
 })
 
 //import * as net from 'node:net'
 import { findAvailablePort } from './findPort.mjs'
+import { readData, saveData } from './readAndSaveFunction.mjs';
 const desiredPort=process.env.PORT??1234
 //const server = net.createServer((req, res) => {
  //   console.log('request received')    
